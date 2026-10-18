@@ -20,17 +20,19 @@ func _run() -> void:
 	yaw_node.rotation.y = atan2(-1.0, 0.0)
 	print("WALL_BASIS_Z ", yaw_node.global_transform.basis.z)
 
-	_expect(col, fails, "bridge", Vector3(0, Config.AVOCA_FLOOR, 0.0), "Bridge")
-	_expect(col, fails, "bridge_fwd", Vector3(0, Config.AVOCA_FLOOR, 4.0), "Bridge")
-	_expect(col, fails, "bridge_port", Vector3(-7.0, Config.AVOCA_FLOOR, 0.0), "Bridge")
+	_expect(col, fails, "bridge", Vector3(0, Config.AVOCA_FLOOR, -3.5), "Bridge")
+	_expect(col, fails, "bridge_fwd", Vector3(0, Config.AVOCA_FLOOR, 4.5), "Bridge")
+	_expect(col, fails, "bridge_port", Vector3(-7.0, Config.AVOCA_FLOOR, -3.5), "Bridge")
 
-	var walker := Vector3(0, Config.AVOCA_FLOOR, 0)
+	var walker := Vector3(0, Config.AVOCA_FLOOR, 4.5)
 	for _step in 80:
 		walker.x += 0.25
 		walker = col.resolve(walker)
 	print("HULL ", walker)
 	if walker.x > Config.AVOCA_HALF_X - 0.25:
 		fails.append("hull leaked %s" % walker)
+	if walker.x < Config.AVOCA_HALF_X - 1.5:
+		fails.append("hull blocked early %s" % walker)
 
 	player.active = true
 	player.global_position = Vector3(0, Config.AVOCA_FLOOR, 0)
@@ -44,14 +46,14 @@ func _run() -> void:
 	player.held.clear()
 	player.global_position = Vector3(0, Config.AVOCA_FLOOR, -2.4)
 
-	var toward := Vector3(0, Config.AVOCA_FLOOR, 0.0)
+	var toward := Vector3(7.2, Config.AVOCA_FLOOR, 1.0)
 	for _step in 50:
 		toward.z += 0.3
 		toward = col.resolve(toward)
 	print("FRONT_WALL ", toward)
 	if toward.z > Config.AVOCA_HALF_Z - 0.15:
 		fails.append("front wall failed %s" % toward)
-	if toward.z < Config.AVOCA_HALF_Z - 3.0:
+	if toward.z < 4.0:
 		fails.append("front wall blocked too early %s" % toward)
 
 	player.active = true

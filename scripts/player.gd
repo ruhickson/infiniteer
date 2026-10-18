@@ -6,7 +6,7 @@ var collision
 var camera: Camera3D
 var held := {}
 var active := false
-var yaw := 0.0
+var yaw := PI
 var pitch := -0.08
 
 func setup(collision_world) -> void:
