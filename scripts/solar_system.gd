@@ -1,7 +1,7 @@
 extends RefCounted
 
 # Keplerian planets from J2000 elements, advanced to the ship clock.
-# The Shannon starts off Ganymede. A course is a straight cruise to where
+# The Avoca starts off Ganymede. A course is a straight cruise to where
 # the destination will be, plus a burn to leave and a burn to arrive.
 
 const AU_KM := 149597870.7
@@ -92,7 +92,7 @@ func page(selected_id: String) -> String:
 	var ship := ship_position(day)
 	var ganymede := body_position("Ganymede", day)
 	lines.append(_clock(day))
-	lines.append("S.F. Shannon off Ganymede")
+	lines.append("S.F. Avoca off Ganymede")
 	lines.append("Sun distance     %s" % _dist_full(ship.length()))
 	lines.append("Ganymede         %s" % _dist_full(ship.distance_to(ganymede)))
 	lines.append(_rate_line())
@@ -104,7 +104,7 @@ func page(selected_id: String) -> String:
 		lines.append("Facing the bow, starboard is longitude 0° and ahead is 90°.")
 		lines.append("Height off the glass is true inclination.")
 		lines.append("Radius is compressed so Neptune fits on the glass.")
-		lines.append("The Shannon marker sits on Jupiter at this scale.")
+		lines.append("The Avoca marker sits on Jupiter at this scale.")
 		lines.append("")
 		lines.append("A course is a straight cruise at %s AU/day (%.0f km/s)" % [CRUISE_AU_PER_DAY, _cruise_km_s()])
 		lines.append("to where the body will be, plus a burn to leave and a burn to arrive.")
@@ -197,7 +197,7 @@ func _append_course(lines: PackedStringArray, id: String) -> void:
 	lines.append("DESTINATION  %s" % id)
 	lines.append("Range now    %s" % _dist_full(float(course["range_now"])))
 	if String(course["note"]) == "on_station":
-		lines.append("Shannon is already off Ganymede, in the Jovian system.")
+		lines.append("Avoca is already off Ganymede, in the Jovian system.")
 		lines.append("Choose a moon, or another planet.")
 		return
 	if not bool(course["solvable"]):

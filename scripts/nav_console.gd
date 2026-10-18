@@ -4,7 +4,7 @@ const Config = preload("res://scripts/config.gd")
 const SolarSystem = preload("res://scripts/solar_system.gd")
 
 const TABLE_X := 0.0
-const TABLE_Z := 12.0
+const TABLE_Z := Config.AVOCA_ORRERY_Z
 const USE_RADIUS := 3.35
 
 var system
@@ -89,7 +89,7 @@ func _near() -> bool:
 	var flat := Vector2(feet.x - TABLE_X, feet.z - TABLE_Z)
 	if flat.length() > USE_RADIUS:
 		return false
-	return absf(feet.y - Config.OPERATIONS_FLOOR) <= 1.6
+	return absf(feet.y - Config.AVOCA_FLOOR) <= 1.6
 
 func _refresh_text() -> void:
 	course_label.text = system.page(selected)

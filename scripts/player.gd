@@ -14,8 +14,8 @@ func setup(collision_world) -> void:
 
 func _ready() -> void:
 	name = "Player"
-	var floor_y: float = Config.OPERATIONS_FLOOR
-	global_position = Vector3(0, floor_y, Config.BRIDGE_CZ - 1.35)
+	var floor_y: float = Config.AVOCA_FLOOR
+	global_position = Vector3(0, floor_y, -2.4)
 	camera = Camera3D.new()
 	camera.current = true
 	camera.fov = 74

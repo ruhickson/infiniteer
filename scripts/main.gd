@@ -2,7 +2,7 @@ extends Node3D
 
 const Config = preload("res://scripts/config.gd")
 const CollisionWorld = preload("res://scripts/collision.gd")
-const Ship = preload("res://scripts/ship.gd")
+const Avoca = preload("res://scripts/avoca.gd")
 const Player = preload("res://scripts/player.gd")
 const Starfield = preload("res://scripts/starfield.gd")
 const NavConsole = preload("res://scripts/nav_console.gd")
@@ -16,7 +16,7 @@ var overlay: Control
 func _ready() -> void:
 	_environment()
 	collision = CollisionWorld.new()
-	var ship = Ship.new()
+	var ship = Avoca.new()
 	ship.name = "Ship"
 	ship.setup(collision)
 	add_child(ship)
@@ -52,7 +52,7 @@ func _hud() -> void:
 	var layer := CanvasLayer.new()
 	add_child(layer)
 	location_label = Label.new()
-	location_label.text = "Bridge  ·  S.F. Shannon"
+	location_label.text = "Bridge  ·  S.F. Avoca"
 	location_label.position = Vector2(28, 24)
 	location_label.add_theme_font_size_override("font_size", 22)
 	location_label.add_theme_color_override("font_color", Color(0.92, 0.96, 1))
@@ -108,8 +108,8 @@ func _overlay() -> Control:
 	center.add_child(box)
 	_overlay_label(box, "SOLAR FLYER", 13, Color(1, 1, 1, 0.55))
 	_overlay_label(box, "INFINITEER", 52, Color(0.95, 0.97, 1))
-	_overlay_label(box, "S.F. SHANNON", 16, Color(0.56, 0.82, 1))
-	var story := _overlay_label(box, "You are Attom, an android newly rebooted after time in a robot penitentiary off one of Jupiter's moons. The ship is quiet. The decks are waiting.", 16, Color(1, 1, 1, 0.82))
+	_overlay_label(box, "S.F. AVOCA", 16, Color(0.56, 0.82, 1))
+	var story := _overlay_label(box, "You are Attom, an android newly rebooted after time in a robot penitentiary off one of Jupiter's moons. The Avoca is quiet. The bridge is waiting.", 16, Color(1, 1, 1, 0.82))
 	story.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	story.custom_minimum_size = Vector2(520, 80)
 	story.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
@@ -161,7 +161,7 @@ func _process(_delta: float) -> void:
 	if player == null:
 		return
 	var zone: Dictionary = collision.locate(player.feet_position())
-	var where := "S.F. Shannon"
+	var where := "S.F. Avoca"
 	if not zone.is_empty():
-		where = "%s  ·  S.F. Shannon" % zone.name
+		where = "%s  ·  S.F. Avoca" % zone.name
 	location_label.text = where
