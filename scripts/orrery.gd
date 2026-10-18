@@ -136,7 +136,7 @@ func _planet(id: String) -> void:
 
 func _ship_marker() -> void:
 	var root := Node3D.new()
-	root.name = "Shannon"
+	root.name = "Avoca"
 	add_child(root)
 	var mesh := SphereMesh.new()
 	mesh.radius = 0.012
@@ -157,7 +157,7 @@ func _ship_marker() -> void:
 	pin_mi.material_override = _glow(Color(0.55, 0.95, 1.0), 1.2)
 	pin_mi.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	root.add_child(pin_mi)
-	var label := _label("SHANNON", Color(0.7, 0.95, 1.0), 0.0015)
+	var label := _label("AVOCA", Color(0.7, 0.95, 1.0), 0.0015)
 	label.position = Vector3(0.0, 0.12, 0.0)
 	root.add_child(label)
 
@@ -166,8 +166,8 @@ func _place() -> void:
 		var body_id := String(id)
 		var node := get_node(body_id) as Node3D
 		node.position = system.to_table(system.body_position(body_id, system.day))
-	var shannon := get_node("Shannon") as Node3D
-	shannon.position = system.to_table(system.ship_position(system.day))
+	var avoca := get_node("Avoca") as Node3D
+	avoca.position = system.to_table(system.ship_position(system.day))
 
 func _draw_course(course_plot: Dictionary) -> void:
 	course.clear_surfaces()
